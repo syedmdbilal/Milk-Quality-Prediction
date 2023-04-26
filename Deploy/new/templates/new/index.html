@@ -1,0 +1,67 @@
+{% extends 'new/base.html' %}
+{% load static %}
+
+<style>
+	.white{
+	color:white;
+
+</style>
+	
+	{% block content %}
+	<body class="index">
+	<div>
+		<div style="background-color: #e9ecef;">
+		<a class="navbar-brand text-dark" style="margin-left: 30px;" href="{% url 'apredict' %}">Enter Details</a>
+		<a class="navbar-brand text-dark" style="margin-left: 1088px;" href="{% url 'feedback' %}">Feedback</a>
+	</div><br>
+	<h1 style="text-align:center; color:cyan;"><b>MILK QUALITY PREDICTION</b></h1>
+     <!-- Main Input For Receiving Query to our ML -->
+
+	 <form class="form1 container1" action="{% url 'predict' %}" style="background-color: transparent; box-sizing: border-box;
+	 font-family: proxima_nova_rgregular, Helvetica, Arial, sans-serif;" method="POST">
+	 {% csrf_token %}
+		 <fieldset class="fieldset1">
+			 <legend class="legend1">Enter the Detail</legend>
+
+	 <label class="white"  for=""> pH </label>
+	 <input type="number" class="space form-control" step="0.01" name="pH" placeholder="pH" required="required" /><br><br>
+
+	 <label class="white"  for=""> Temperature </label>
+	 <input type="number" class="space form-control" step="0.01" name="Temperature" placeholder="Temperature" required="required" /><br><br>
+
+	  <label class="white"  for=""> TASTE </label>
+	 <input type="number" class="space form-control" step="1" name="Taste" placeholder="press 0 for bad and 1 for good" required="required" /><br><br>
+
+
+	  <label class="white"  for=""> Odour </label>
+	 <input type="number" class="space form-control" step="1" name="Odour" placeholder="press 0 for bad and 1 for good" required="required" /><br><br>
+
+
+	 <label class="white" for="">Fats</label><br>
+	 <input type="number" class="space form-control" step="1" name="Fat" placeholder="press 0 for Low and 1 for High" required="required" /><br><br>
+
+
+
+	 <label class="white" for="">Turbidity</label><br>
+     <input type="number" class="space form-control" step="1" name="Turbidity" placeholder="press 0 for Low and 1 for High" required="required" /><br><br>
+
+
+	 <label class="white"  for=""> Colour </label>
+	 <input type="number" class="space form-control" step="0.01" name="Colour" placeholder="ranges from 0-255" required="required" /><br><br>
+
+	 <input type="hidden" name="Grade" value="data">
+	 <input class="input1" type="submit" value="Submit"><br>
+		 </fieldset>
+	 </form>
+
+
+   <br>
+   <br>
+<div  style="background:skyblue;padding:2% 40%">
+   {{ prediction_text }}
+</div>
+ </div>
+
+ {% endblock content %}
+</body>
+</html>
